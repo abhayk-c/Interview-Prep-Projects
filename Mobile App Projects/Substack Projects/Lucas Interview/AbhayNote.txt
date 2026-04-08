@@ -1,0 +1,12 @@
+Hey Lucas,
+
+I hope this note makes it your way. Firstly I wanted to thank you for taking the time to interview me, it was an enjoyable experience and a unique practical interview which I appreciated. I wanted to just continue my thought and wrap up the last question you asked me.
+
+After the interview I pretty quickly spot checked that a new PlayBackVC was being created in memory every time when we present the VC after a call tap. That's likely the reason for the application memory pressure we were observing and the PlayBackVC still being in memory. To fix this I'd simply have the SearchVC create a PlayBackVC once and retain it in memory as a strongly referenced property. We could then re-present this single created VC instance every time on cell tap, which should prevent the memory spikes and unnecessary allocations. The VC may need to be refactored to accept a settable data/view model for things like the playback URL, but thats easy to do.
+
+If I had another minute or two in the interview I could have walked through this. I spotted this issue almost immediately after our call so I wanted to atleast close the loop here.
+
+Thanks again for the interview I really enjoyed it, and I hope you have a happy holidays coming up.
+
+Cheers,
+Abhay

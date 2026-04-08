@@ -1,0 +1,212 @@
+
+
+
+// Given a tree like structure, create a function that takes two nodes and returns the nearest common ancestor.
+
+// // Depth
+// // 0       A
+// //        / \
+// // 1     B   C
+// //      / \   \
+// // 2   D   E   G
+// //          \
+// // 3         F
+         
+// let commonAncestor = getCommonAncestor(of:B, and: C) // A
+// let commonAncestor = getCommonAncestor(of:A, and: B) // A
+// let commonAncestor = getCommonAncestor(of:D, and: F) // B
+// let commonAncestor = getCommonAncestor(of:C, and: F) // A
+// let commonAncestor = getCommonAncestor(of:B, and: F) // B
+// let commonAncestor = getCommonAncestor(of:Y, and: Z) // nil
+
+
+/**
+ * Approach A - Tree with parent pointers, simple bottom-up iteration
+ * using hash-set.
+ */
+class TreeNodeWithParent {
+    let value: String
+    var left: TreeNodeWithParent?
+    var right: TreeNodeWithParent?
+    var parent: TreeNodeWithParent?
+    public init(value: String,
+                left: TreeNodeWithParent? = nil,
+                right: TreeNodeWithParent? = nil,
+                parent: TreeNodeWithParent? = nil) {
+        self.value = value
+        self.left = left
+        self.right = right
+        self.parent = parent
+    }
+}
+
+func getCommonAncestorForTreeWithParentPointers(_ nodeOne: TreeNodeWithParent, _ nodeTwo: TreeNodeWithParent) -> TreeNodeWithParent? {
+    var ancestorSet = Set<ObjectIdentifier>()
+    var cursor: TreeNodeWithParent? = nodeOne
+    while let currentNode = cursor {
+        ancestorSet.insert(ObjectIdentifier(currentNode))
+        cursor = currentNode.parent
+    }
+    cursor = nodeTwo
+    while let currentNode = cursor {
+        if ancestorSet.contains(ObjectIdentifier(currentNode)) {
+            return currentNode
+        }
+        cursor = cursor?.parent
+    }
+    return nil
+}
+
+/**
+ * Test Cases from Prompt and a few more
+ */
+let f = TreeNodeWithParent(value: "F", left: nil, right: nil)
+let e = TreeNodeWithParent(value: "E", left: nil, right: f)
+let d = TreeNodeWithParent(value: "D", left: nil, right: nil)
+let b = TreeNodeWithParent(value: "B", left: d, right: e)
+let g = TreeNodeWithParent(value: "G", left: nil, right: nil)
+let c = TreeNodeWithParent(value: "C", left: nil, right: g)
+let a = TreeNodeWithParent(value: "A", left: b, right: c)
+f.parent = e
+e.parent = b
+d.parent = b
+b.parent = a
+g.parent = c
+c.parent = a
+let y = TreeNodeWithParent(value: "Y", left: nil, right: nil)
+let z = TreeNodeWithParent(value: "Z", left: nil, right: nil)
+
+print("Approach A test output:")
+print(getCommonAncestorForTreeWithParentPointers(b, c)?.value ?? "nil") //comm(B,C) -> A
+print(getCommonAncestorForTreeWithParentPointers(a, b)?.value ?? "nil") //comm(A,B) -> A
+print(getCommonAncestorForTreeWithParentPointers(d, f)?.value ?? "nil") //comm(D,F) -> B
+print(getCommonAncestorForTreeWithParentPointers(c, f)?.value ?? "nil") //comm(C,F) -> A
+print(getCommonAncestorForTreeWithParentPointers(b, f)?.value ?? "nil") //comm(B,F) -> B
+print(getCommonAncestorForTreeWithParentPointers(c, f)?.value ?? "nil") //comm(C,F) -> A
+print(getCommonAncestorForTreeWithParentPointers(y, z)?.value ?? "nil") //comm(Y,Z) -> nil
+print(getCommonAncestorForTreeWithParentPointers(d, f)?.value ?? "nil") //comm(D,F) -> B
+
+
+/**
+ * Approach B - LCA given two nodes and root, iteratively tracking ancestor stack
+ * and traversal direction.
+ */
+class TreeNode {
+    let value: String
+    let left: TreeNode?
+    let right: TreeNode?
+    public init(value: String, left: TreeNode?, right: TreeNode?) {
+        self.value = value
+        self.left = left
+        self.right = right
+    }
+}
+
+enum TraversalState {
+    case none, traversedLeft, traversedRight
+}
+
+class AncestorNode {
+    let node: TreeNode
+    var traversalState: TraversalState
+    public init(node: TreeNode, traversalState: TraversalState) {
+        self.node = node
+        self.traversalState = traversalState
+    }
+}
+
+func getCommonAncestor(_ root: TreeNode,
+                       _ nodeOne: TreeNode,
+                       _ nodeTwo: TreeNode) -> TreeNode? {
+    var ancestorStack: [AncestorNode] = []
+    if let foundNodeOne = findNodeIteratively(root, nodeOne, &ancestorStack) {
+        for i in (0..<ancestorStack.count).reversed() {
+            let current = ancestorStack[i]
+            var foundNodeTwo: TreeNode?
+            var localTraversalStack: [AncestorNode] = []
+            if current.traversalState == .none {
+                foundNodeTwo = findNodeIteratively(current.node, nodeTwo, &localTraversalStack)
+            } else if current.traversalState == .traversedLeft {
+                foundNodeTwo = findNodeIteratively(current.node.right, nodeTwo, &localTraversalStack)
+            } else {
+                foundNodeTwo = findNodeIteratively(current.node.left, nodeTwo, &localTraversalStack)
+            }
+            if foundNodeTwo != nil {
+                return current.node //LCA
+            }
+        }
+    }
+    
+    return nil
+}
+
+func findNodeIteratively(_ root: TreeNode?,
+                         _ target: TreeNode?,
+                         _ ancestorStack: inout [AncestorNode]) -> TreeNode?
+{
+    guard let rootNode = root, let targetNode = target else { return nil }
+    let rootAncestor = AncestorNode(node: rootNode, traversalState: .none)
+    ancestorStack.append(rootAncestor)
+    while let currentNode = ancestorStack.last {
+        if currentNode.node.value == targetNode.value {
+            return currentNode.node
+        }
+        if currentNode.traversalState == .none {
+            if let leftChild = currentNode.node.left {
+                //move left
+                currentNode.traversalState = .traversedLeft
+                let leftChildNode = AncestorNode(node: leftChild, traversalState: .none)
+                ancestorStack.append(leftChildNode)
+            } else if let rightChild = currentNode.node.right {
+                //move right
+                currentNode.traversalState = .traversedRight
+                let rightChildNode = AncestorNode(node: rightChild, traversalState: .none)
+                ancestorStack.append(rightChildNode)
+            } else {
+                //leaf node so pop
+                ancestorStack.removeLast() //pop
+            }
+        } else if currentNode.traversalState == .traversedLeft {
+            if let rightChild = currentNode.node.right {
+                //move right
+                currentNode.traversalState = .traversedRight
+                let rightChildNode = AncestorNode(node: rightChild, traversalState: .none)
+                ancestorStack.append(rightChildNode)
+            } else {
+                //nothing on right so pop
+                ancestorStack.removeLast() //pop
+            }
+        } else {
+            ancestorStack.removeLast() //pop
+        }
+    }
+    
+    return nil
+}
+
+
+/**
+ * Test Cases from Prompt and a few more
+ */
+let fNode = TreeNode(value: "F", left: nil, right: nil)
+let eNode = TreeNode(value: "E", left: nil, right: fNode)
+let dNode = TreeNode(value: "D", left: nil, right: nil)
+let bNode = TreeNode(value: "B", left: dNode, right: eNode)
+let gNode = TreeNode(value: "G", left: nil, right: nil)
+let cNode = TreeNode(value: "C", left: nil, right: gNode)
+let aNode = TreeNode(value: "A", left: bNode, right: cNode)
+let root = aNode
+let yNode = TreeNode(value: "Y", left: nil, right: nil)
+let zNode = TreeNode(value: "Z", left: nil, right: nil)
+
+print("Approach A test output:")
+print(getCommonAncestor(root, bNode, cNode)?.value ?? "nil") //comm(B,C) -> A
+print(getCommonAncestor(root, aNode, bNode)?.value ?? "nil") //comm(A,B) -> A
+print(getCommonAncestor(root, dNode, fNode)?.value ?? "nil") //comm(D,F) -> B
+print(getCommonAncestor(root, cNode, fNode)?.value ?? "nil") //comm(C,F) -> A
+print(getCommonAncestor(root, bNode, fNode)?.value ?? "nil") //comm(B,F) -> B
+print(getCommonAncestor(root, cNode, fNode)?.value ?? "nil") //comm(C,F) -> A
+print(getCommonAncestor(root, yNode, zNode)?.value ?? "nil") //comm(Y,Z) -> nil("")
+print(getCommonAncestor(root, dNode, fNode)?.value ?? "nil") //comm(D,F) -> B
+
+

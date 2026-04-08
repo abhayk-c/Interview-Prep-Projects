@@ -1,0 +1,13 @@
+Hey Rao,
+
+I hope this note makes it your way. Firstly I wanted to thank you for taking the time to interview me. I enjoyed the question it was a fun challenge and problem to solve. Near the end of the interview you raised an important scenario: even if Person A is physically closer to Scooter X than Person B, the optimal assignment might still give Scooter X to Person B due to conflicts or because Person A is even closer to a different scooter. As I mentioned during the interview, to solve for this I'd consider scooter assignment at a more "global" level and run a BFS from all person's on the map (multiple source vertices) and save the distances.
+
+I went ahead and fleshed out my algorithmic direction and finished the problem so I wanted to share the final solution with you and give you confidence I was on the correct track. I believe if given 20-30 more minutes I would have fleshed this direction out in the interview itself.
+
+If you open the Swift playground file you can see my solution, along with two test case maps passing the edge cases you brought up. You can read my code comments to understand my algorithmic approach. At a high level I run a BFS starting from each person on the map and compute the distances from that person to all scooters in the map. I store all these in an array and sort by distance. Then I run through a greedy algorithm to match/assign people to scooters based on distance. I believe this works well for all cases.
+
+
+Thanks for the interesting problem, have a happy holidays!
+
+Cheers,
+Abhay
