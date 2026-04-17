@@ -683,3 +683,61 @@ let scooterAssignments = ScooterAssignment()
 let nearestScooter = scooterAssignments.findClosestScooter(map: &scooterMap,
                                                            startPersonPosition: MapPosition(row: 4, col: 9))
 print(nearestScooter)
+
+
+print("Parens Validator Tests: ")
+
+let parensOne = "{({[{}]})}"
+print(ParenthesesValidator().isValid(parensOne))
+let parensTwo = "{({[{}]})"
+print(ParenthesesValidator().isValid(parensTwo))
+let parensThree = "{({[{}]})}}"
+print(ParenthesesValidator().isValid(parensThree))
+let parensFour = "{({[{}]})}()"
+print(ParenthesesValidator().isValid(parensFour))
+
+
+print("Ordered Stack")
+let orderedStack = SortedStack()
+orderedStack.push(10)
+orderedStack.push(0)
+orderedStack.push(4)
+orderedStack.push(3)
+orderedStack.push(2)
+orderedStack.push(8)
+
+while !orderedStack.isEmpty() {
+    print(orderedStack.pop())
+}
+
+print("/n")
+print("Stack Sort")
+var arrayStack = ArrayStack([10,0,4,3,2,8])
+var sortedStack = sortStack(arrayStack)
+while !sortedStack.isEmpty() {
+    print(sortedStack.pop())
+}
+print("--------------")
+arrayStack = ArrayStack([0,2,3,4,5,6,7,8])
+sortedStack = sortStack(arrayStack)
+while !sortedStack.isEmpty() {
+    print(sortedStack.pop())
+}
+print("--------------")
+arrayStack = ArrayStack([8,7,6,5,4,3,2])
+sortedStack = sortStack(arrayStack)
+while !sortedStack.isEmpty() {
+    print(sortedStack.pop())
+}
+print("--------------")
+arrayStack = ArrayStack([8])
+sortedStack = sortStack(arrayStack)
+while !sortedStack.isEmpty() {
+    print(sortedStack.pop())
+}
+print("--------------")
+arrayStack = ArrayStack([])
+sortedStack = sortStack(arrayStack)
+while !sortedStack.isEmpty() {
+    print(sortedStack.pop())
+}
