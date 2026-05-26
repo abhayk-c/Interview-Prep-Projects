@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public class TreeNode {
     public var val: Int
     public var left: TreeNode?
@@ -773,3 +772,26 @@ print(backspaceStringComparison.backSpaceCompareUsingSlidingWindow("ab##", "c#d#
 print(backspaceStringComparison.backSpaceCompareUsingSlidingWindow("ab#c", "ad#f"))
 print(backspaceStringComparison.backSpaceCompareUsingSlidingWindow("bgef######d", "dc#"))
 print(backspaceStringComparison.backSpaceCompareUsingSlidingWindow("bgef######d", "ac########d"))
+
+print("String Compression Tests")
+var testCharacters: [Character] = ["a","b","c","d","e"]
+print(RunLengthEncodingCompression().compress(&testCharacters))
+print(testCharacters)
+var testCharactersTwo: [Character] = ["a","b","b","c","d","e","e"]
+print(RunLengthEncodingCompression().compress(&testCharactersTwo))
+print(testCharactersTwo)
+var testCharactersThree: [Character] = ["a","a","b","b","c","c","c"]
+print(RunLengthEncodingCompression().compress(&testCharactersThree))
+print(testCharactersThree)
+var testCharactersFour: [Character] = ["a"]
+print(RunLengthEncodingCompression().compress(&testCharactersFour))
+print(testCharactersFour)
+var testCharactersFive: [Character] = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
+print(RunLengthEncodingCompression().compress(&testCharactersFive))
+print(testCharactersFive)
+var testCharactersSix: [Character] = ["b","b","b","b","b","b","b","b","b","b","b","b","a"]
+print(RunLengthEncodingCompression().compress(&testCharactersSix))
+print(testCharactersSix)
+
+
+
