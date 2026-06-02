@@ -16,8 +16,8 @@ public struct TrieCursor {
 
 private class TrieNode {
     fileprivate var currentCharacter: Character
-    fileprivate var count: Int
-    fileprivate var terminalWord: String?
+    fileprivate var count: Int // Tracks how many "non-nil" children a node has. Useful order statistic.
+    fileprivate var terminalWord: String? // If the current node marks a terminal word, i.e. "apple" and we are on character "e"
     fileprivate var children: [TrieNode?]
     public init(_ currentCharacter: Character) {
         self.currentCharacter = currentCharacter
