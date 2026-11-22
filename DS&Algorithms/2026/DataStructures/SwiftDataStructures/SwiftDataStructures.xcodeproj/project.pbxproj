@@ -6,6 +6,10 @@
 	objectVersion = 110;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B58A171C30781BB800212779 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58A171B30781BB600212779 /* main.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		B52DA8742FFD82AC003BD0B6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -18,13 +22,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B52DA8762FFD82AC003BD0B6 /* List */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = List; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52DA8762FFD82AC003BD0B6 /* SwiftDataStructures */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftDataStructures; sourceTree = BUILT_PRODUCTS_DIR; };
+		B58A171B30781BB600212779 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B52DA8782FFD82AC003BD0B6 /* List */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = List;
+			sourceTree = "<group>";
+		};
+		B58A171D30781CB200212779 /* BinarySearchTree */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = BinarySearchTree;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -41,6 +51,8 @@
 		B52DA86D2FFD82AC003BD0B6 = {
 			isa = PBXGroup;
 			children = (
+				B58A171D30781CB200212779 /* BinarySearchTree */,
+				B58A171B30781BB600212779 /* main.swift */,
 				B52DA8782FFD82AC003BD0B6 /* List */,
 				B52DA8772FFD82AC003BD0B6 /* Products */,
 			);
@@ -49,7 +61,7 @@
 		B52DA8772FFD82AC003BD0B6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B52DA8762FFD82AC003BD0B6 /* List */,
+				B52DA8762FFD82AC003BD0B6 /* SwiftDataStructures */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +69,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B52DA8752FFD82AC003BD0B6 /* List */ = {
+		B52DA8752FFD82AC003BD0B6 /* SwiftDataStructures */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B52DA87D2FFD82AC003BD0B6 /* Build configuration list for PBXNativeTarget "List" */;
+			buildConfigurationList = B52DA87D2FFD82AC003BD0B6 /* Build configuration list for PBXNativeTarget "SwiftDataStructures" */;
 			buildPhases = (
 				B52DA8722FFD82AC003BD0B6 /* Sources */,
 				B52DA8732FFD82AC003BD0B6 /* Frameworks */,
@@ -69,10 +81,11 @@
 			);
 			fileSystemSynchronizedGroups = (
 				B52DA8782FFD82AC003BD0B6 /* List */,
+				B58A171D30781CB200212779 /* BinarySearchTree */,
 			);
-			name = List;
+			name = SwiftDataStructures;
 			productName = List;
-			productReference = B52DA8762FFD82AC003BD0B6 /* List */;
+			productReference = B52DA8762FFD82AC003BD0B6 /* SwiftDataStructures */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -90,7 +103,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B52DA8712FFD82AC003BD0B6 /* Build configuration list for PBXProject "List" */;
+			buildConfigurationList = B52DA8712FFD82AC003BD0B6 /* Build configuration list for PBXProject "SwiftDataStructures" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -104,7 +117,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B52DA8752FFD82AC003BD0B6 /* List */,
+				B52DA8752FFD82AC003BD0B6 /* SwiftDataStructures */,
 			);
 		};
 /* End PBXProject section */
@@ -113,12 +126,13 @@
 		B52DA8722FFD82AC003BD0B6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				B58A171C30781BB800212779 /* main.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B52DA87B2FFD82AC003BD0B6 /* Debug configuration for PBXProject "List" */ = {
+		B52DA87B2FFD82AC003BD0B6 /* Debug configuration for PBXProject "SwiftDataStructures" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -181,7 +195,7 @@
 			};
 			name = Debug;
 		};
-		B52DA87C2FFD82AC003BD0B6 /* Release configuration for PBXProject "List" */ = {
+		B52DA87C2FFD82AC003BD0B6 /* Release configuration for PBXProject "SwiftDataStructures" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -236,7 +250,7 @@
 			};
 			name = Release;
 		};
-		B52DA87E2FFD82AC003BD0B6 /* Debug configuration for PBXNativeTarget "List" */ = {
+		B52DA87E2FFD82AC003BD0B6 /* Debug configuration for PBXNativeTarget "SwiftDataStructures" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -247,7 +261,7 @@
 			};
 			name = Debug;
 		};
-		B52DA87F2FFD82AC003BD0B6 /* Release configuration for PBXNativeTarget "List" */ = {
+		B52DA87F2FFD82AC003BD0B6 /* Release configuration for PBXNativeTarget "SwiftDataStructures" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -261,19 +275,19 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B52DA8712FFD82AC003BD0B6 /* Build configuration list for PBXProject "List" */ = {
+		B52DA8712FFD82AC003BD0B6 /* Build configuration list for PBXProject "SwiftDataStructures" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B52DA87B2FFD82AC003BD0B6 /* Debug configuration for PBXProject "List" */,
-				B52DA87C2FFD82AC003BD0B6 /* Release configuration for PBXProject "List" */,
+				B52DA87B2FFD82AC003BD0B6 /* Debug configuration for PBXProject "SwiftDataStructures" */,
+				B52DA87C2FFD82AC003BD0B6 /* Release configuration for PBXProject "SwiftDataStructures" */,
 			);
 			defaultConfigurationName = Release;
 		};
-		B52DA87D2FFD82AC003BD0B6 /* Build configuration list for PBXNativeTarget "List" */ = {
+		B52DA87D2FFD82AC003BD0B6 /* Build configuration list for PBXNativeTarget "SwiftDataStructures" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B52DA87E2FFD82AC003BD0B6 /* Debug configuration for PBXNativeTarget "List" */,
-				B52DA87F2FFD82AC003BD0B6 /* Release configuration for PBXNativeTarget "List" */,
+				B52DA87E2FFD82AC003BD0B6 /* Debug configuration for PBXNativeTarget "SwiftDataStructures" */,
+				B52DA87F2FFD82AC003BD0B6 /* Release configuration for PBXNativeTarget "SwiftDataStructures" */,
 			);
 			defaultConfigurationName = Release;
 		};

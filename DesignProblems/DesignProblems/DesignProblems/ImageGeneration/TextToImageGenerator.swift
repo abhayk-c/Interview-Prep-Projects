@@ -48,7 +48,7 @@ public protocol TextToImageGenerationDelegate {
  *
  */
 public protocol TextToImageGeneration {
-    var delegate: TextToImageGenerationDelegate { get set }
+    var delegate: TextToImageGenerationDelegate? { get set }
     
     typealias ImageGenCreateCompletion = ((_ request: TextToImageGenerationRequest?, _ error: NSError?) -> Void)
     typealias ImageGenDeleteCompletion = ((_ success: Bool, _ error: NSError?) -> Void)
@@ -60,7 +60,7 @@ public protocol TextToImageGeneration {
 }
 
 public class TextToImageGenerator: TextToImageGeneration {
-    public var delegate: any TextToImageGenerationDelegate
+    public var delegate: any TextToImageGenerationDelegate?
     public func createTextToImageGenerationRequest(_ textPrompt: String, _ completion: @escaping ImageGenCreateCompletion) {}
     public func generateImages(_ count: Int, for request: TextToImageGenerationRequest, _ completion: (TextToImageGenerationOperation?, NSError?) -> Void) {}
     public func deleteTextToImageGenerationRequest(_ request: TextToImageGenerationRequest, _ completion: @escaping ImageGenDeleteCompletion) {}

@@ -42,7 +42,10 @@ public class SiriDictationRealTimeTokenizer {
  * extensibility to swap different implementations of the core.
  */
 public struct SiriDictationRealTimeTokenizerFactory {
-    
-    public static func createDefaultRealTimeTokenizer() -> SiriDictationRealTimeTokenizer? {}
+
+    public static func createDefaultRealTimeTokenizer() -> SiriDictationRealTimeTokenizer? {
+        //Just a STUB
+        return nil
+    }
     
 }
