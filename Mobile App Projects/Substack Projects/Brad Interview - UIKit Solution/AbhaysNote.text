@@ -1,0 +1,19 @@
+Hey Brad,
+
+I hope this note and project makes it your way. First off I wanted to thank you for an enjoyable interview experience and a fun problem to solve, thanks for your time. I spent like 30 more minutes after our interview to finish my direction/thoughts to get some basic UI rendering on the page. I know we had a little requirements miscommunication which caused me to pivot the approach mid-way through the exercise, so I just wanted to give you confidence to show you how I think about building scalable UI and mobile product infrastructure. If you build the application you should see some of the UX rendering on screen. A few architectural/implementation details I wanted to mention:
+
+1. The image is currently "left" justified, this is one of the limitations of a UIStackView. We can set custom spacing for arranged Subviews in the stack, but we can't set custom axis alignment for each view. To work around this I'd throw the imageView in a containerView, and center the image within the containerView. That would get around the problem here.
+
+2. I didn't have enough time to build out the BlockQuote NodeView but if I had more time, I'd build it as its own custom container view. Within the view I'd lay out an orange rectangular view for that side bar in the UX, and then lay out UILabel's again with attributed text for the text to the right. Since it's a bit more complex component a custom UIView containerView makes sense for the BlockQuote.
+
+3. I use a simple static factory design to convert nodes into attributed text (to move that presentation/formatting logic out of the VC). If our view's for Heading and Paragraph become more complex we could have these be custom container view's as well, that accept ViewModel's, and the ViewModel's themselves could handle generating the attributedText for display. A builder pattern could be used as an alternative (or even in conjunction). Set "nodes" on the builder and then query back an attributedString/text cleanly formatted.
+
+4. If the pages on the app become more dynamic in nature and the text styling becomes more complex, a cleaner approach could be to have the server handle the text formatting and have server directly send us rich text (think html tagged strings). TextView's and UILabel attributed text can render most HTML rich text tagged string's out of the box and we can write our own client-side logic for any custom tags. We followed this approach when I was working at Workday for our iOS app in our form/doc previewing and editing features and it worked quite well.
+
+5. ImageDownloader is just a fire and forget quick downloader for an image. This can get much more sophisticated depending on app needs (caching downloaded images, download cancellation, concurrency, etc.)
+
+
+Have a happy holidays coming up.
+
+Cheers,
+Abhay
